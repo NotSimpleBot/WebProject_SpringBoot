@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+
+<!--Что бы Thymeleaf работал, нужно указать на него ссылку (name space), если не юзаем, то он серый-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Блог сайта</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--Bootstrap CDN (CSS Link)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="blocks/header :: myHeader"></header>
+<!--Это основное тело (контент)-->
+<!--div - это блок, к содержимому которого будут прменяться одинаковые фильтры (mt-5 отступ сверху, container отностится к bootstrap)-->
+<div class="container mt-5 mb-5">
+    <h1>Добавление статьи</h1>
+<!--  form action="/blog/add" -> обработка будет происходить на этой же странице где и сама форма  -->
+    <form action="/blog/add" method="post">
+        <input type="hidden" name="id"  th:value="${post.id}">
+        <input type="hidden" name="views" th:value="${post.views}">
+
+        <input  type="text" name="title" placeholder="Введите название статьи" th:value="${post.title}" aria-placeholder="" class="form-control"><br>
+        <input type="text" name="anons" placeholder="Введите анонс статьи" th:value="${post.anons}" class="form-control"><br>
+        <textarea name="full_text" placeholder="Введите полный текст статьи" th:text="${post.fullText}" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-success">Добавить статью</button>
+    </form>
+</div>
+
+<div th:insert="blocks/footer :: myFooter"></div>
+</body>
+</html>
